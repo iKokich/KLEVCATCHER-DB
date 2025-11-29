@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-wrapper {
+  position: relative;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* 
+==============================================
+--- СВЕТЛАЯ ТЕМА (по умолчанию) ---
+==============================================
+*/
+.app-wrapper {
+  background-color: #FFFFFF;
+  color: #111827;
+}
+
+/* Фоны секций */
+.light-theme.section-home,
+.light-theme.section-about,
+.light-theme.section-partners {
+  background-color: #FFFFFF;
+}
+.light-theme.section-expertise {
+  background-color: #F9FAFB; /* Очень светло-серый фон */
+}
+
+/* Элементы */
+nav span { color: #9CA3AF; }
+.login-btn, .register-btn {
+  background-color: #7C3AED;
+  color: #FFFFFF;
+}
+footer { color: #6B7281; }
+.theme-toggle-btn svg { color: #6B7281; }
+.theme-toggle-btn:hover svg { color: #111827; }
+.section {
+  border-top: 1px solid #E5E7EB;
+}
+
+/* 
+==============================================
+--- ТЕМНАЯ ТЕМА ---
+==============================================
+*/
+.dark-theme {
+  background-color: #111827;
+  color: #F9FAFB;
+}
+.dark-theme.section-home,
+.dark-theme.section-about,
+.dark-theme.section-partners {
+  background-color: #111827;
+}
+.dark-theme.section-expertise {
+  background-color: #1F2937; /* Темно-серый фон */
+}
+
+.dark-theme nav span { color: #6B7281; }
+.dark-theme .login-btn,
+.dark-theme .register-btn {
+  background-color: #7C3AED;
+}
+.dark-theme footer { color: #9CA3AF; }
+.dark-theme .theme-toggle-btn svg { color: #9CA3AF; }
+.dark-theme .theme-toggle-btn:hover svg { color: #F9FAFB; }
+.dark-theme .section {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 
+==============================================
+--- ОБЩАЯ СТРУКТУРА МАКЕТА ---
+==============================================
+*/
+.main-header { 
+  display: flex; 
+  justify-content: flex-end; 
+  align-items: center; 
+  width: 100%; 
+  padding: 2rem; 
+  box-sizing: border-box; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 100; 
+  gap: 2rem; 
+}
+.container { display: flex; flex-direction: column; min-height: 100vh; padding: 2rem; padding-top: 120px; box-sizing: border-box; position: relative; }
+.main-screen-content { display: flex; flex-grow: 1; align-items: center; justify-content: flex-end; position: relative; }
+footer { position: absolute; bottom: 2rem; left: 2rem; z-index: 10; font-size: 0.8rem; line-height: 1.4; font-weight: 300; }
+nav { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+.login-btn, .register-btn { border: none; padding: 0.5rem 1.5rem; border-radius: 20px; cursor: pointer; font-family: 'Titillium Web', sans-serif; font-weight: 700; transition: background-color 0.3s ease, color 0.3s ease; }
+.main-content { 
+  position: absolute;
+  left: -50px;
+  top: 55%;
+  transform: translateY(-50%);
+  z-index: 1;
+  overflow: hidden;
+}
+.main-content > div { 
+  width: 550px; 
+  height: 550px;
+  overflow: hidden;
+}
+
+/* Фон анимации в цвет темы - полностью закрашиваем */
+.light-theme .main-content {
+  background: #FFFFFF !important;
+}
+.light-theme .main-content > div {
+  background: #FFFFFF !important;
+}
+
+.dark-theme .main-content {
+  background: #111827 !important;
+}
+.dark-theme .main-content > div {
+  background: #111827 !important;
+}
+
+/* Перекрашиваем ВСЕ элементы внутри SVG анимации */
+.light-theme .main-content svg {
+  background: #FFFFFF !important;
+}
+.light-theme .main-content svg rect {
+  fill: #FFFFFF !important;
+}
+
+.dark-theme .main-content svg {
+  background: #111827 !important;
+}
+.dark-theme .main-content svg rect {
+  fill: #111827 !important;
+}
+.section { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 4rem; box-sizing: border-box; }
+#tsparticles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+/* 
+==============================================
+--- СТИЛИ КОМПОНЕНТОВ ДЛЯ ТЕМНОЙ ТЕМЫ ---
+==============================================
+*/
+/* FeaturesGrid */
+.dark-theme .grid-item { background: rgba(31, 41, 55, 0.7); border: 1px solid rgba(107, 114, 128, 0.2); }
+.dark-theme .grid-item::before { background: radial-gradient(circle closest-side, rgba(124, 58, 237, 0.2), transparent); }
+.dark-theme .grid-item::after { background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(124, 58, 237, 0.4), transparent); }
+.dark-theme .grid-item:hover { box-shadow: 0 0 40px rgba(124, 58, 237, 0.3); }
+.dark-theme h4 { color: #F9FAFB; }
+.dark-theme .category, .dark-theme .description { color: #9CA3AF; }
+.dark-theme .particle { background: #8B5CF6; }

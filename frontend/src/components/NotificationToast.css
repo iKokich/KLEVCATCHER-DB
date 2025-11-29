@@ -1,0 +1,90 @@
+/* src/components/NotificationToast.css */
+
+.notification-toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  min-width: 200px;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.notification-check-icon {
+  color: #10b981;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.notification-message {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #18181b;
+}
+
+.notification-close {
+  background: transparent;
+  border: none;
+  color: #a1a1aa;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.notification-close:hover {
+  opacity: 1;
+  color: #18181b;
+}
+
+/* Dark theme */
+.dark-theme .notification-toast {
+  background: #18181b;
+  border-color: #27272a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .notification-message {
+  color: #ffffff;
+}
+
+.dark-theme .notification-check-icon {
+  color: #10b981;
+}
+
+.dark-theme .notification-close {
+  color: #71717a;
+}
+
+.dark-theme .notification-close:hover {
+  color: #ffffff;
+}

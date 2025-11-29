@@ -1,0 +1,120 @@
+/* src/components/ExpertiseSection.css */
+.expertise-section {
+  /* Фон будет наследоваться */
+}
+
+.expertise-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.expertise-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 1.5rem;
+  text-align: left;
+}
+
+/* --- Стили для карточек --- */
+.stat-card, .cta-card {
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 
+==============================================
+--- СТИЛИ ДЛЯ СВЕТЛОЙ ТЕМЫ (по умолчанию) ---
+==============================================
+*/
+
+/* Карточка со статистикой */
+.stat-card {
+  background-color: #FFFFFF;
+  color: #1F2937;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid transparent; /* Добавляем прозрачную рамку для плавной анимации */
+}
+.stat-card p {
+  margin: 0;
+  color: #6B7281;
+  font-size: 0.9rem;
+}
+.stat-card span {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+/* ИЗМЕНЕНИЕ: Добавляем эффект при наведении для .stat-card */
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: #8B5CF6; /* Подсвечиваем рамку фиолетовым */
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.1); /* Добавляем фиолетовую тень */
+}
+
+
+/* Черная карточка с призывом к действию */
+.cta-card {
+  background-color: #111827;
+  color: #FFFFFF;
+  grid-column: 2 / 3;
+  grid-row: 1 / 4;    
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+.cta-card:hover {
+  transform: translateY(-5px); /* Добавляем эффект подъема и для этой карточки */
+}
+.cta-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* Позиционирование последней карточки */
+.expertise-grid > .stat-card:last-child {
+  grid-column: 2 / 4;
+}
+
+
+/* 
+==============================================
+--- СТИЛИ ДЛЯ ТЕМНОЙ ТЕМЫ ---
+==============================================
+*/
+.dark-theme .stat-card {
+  background-color: #1F2937;
+  color: #F9FAFB;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Рамка в темной теме */
+}
+.dark-theme .stat-card p {
+  color: #9CA3AF;
+}
+.dark-theme .stat-card span {
+  color: #F9FAFB;
+}
+
+/* ИЗМЕНЕНИЕ: Эффект при наведении для темной темы (белая подсветка) */
+.dark-theme .stat-card:hover {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .cta-card {
+  background-color: #000000;
+}

@@ -1,0 +1,110 @@
+/* src/components/AboutSection.css */
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1200px;
+  perspective: 1500px;
+}
+
+/* 
+==============================================
+--- АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ ---
+==============================================
+*/
+.about-image-panel,
+.about-text-panel {
+  flex: 1;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.about-section.is-visible .about-image-panel,
+.about-section.is-visible .about-text-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-section.is-visible .about-text-panel {
+  transition-delay: 0.2s;
+}
+
+
+/* 
+==============================================
+--- СТИЛИ ДЛЯ ИНТЕРАКТИВНОЙ КАРТИНКИ ---
+==============================================
+*/
+.about-image-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* 
+--- Свечение для СВЕТЛОЙ ТЕМЫ (по умолчанию) ---
+*/
+.about-image-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  
+  /* ИЗМЕНЕНИЕ: Постоянное легкое фиолетовое свечение */
+  box-shadow: 0 0 40px 5px rgba(139, 92, 246, 0.2); 
+  
+  border-radius: 16px;
+  z-index: -1;
+  
+  /* ИЗМЕНЕНИЕ: Свечение теперь всегда видимо */
+  opacity: 1; 
+  transition: box-shadow 0.4s ease, opacity 0.4s ease;
+}
+
+/* Усиливаем свечение при наведении в светлой теме */
+.about-image-panel:hover::after {
+  box-shadow: 0 0 60px 15px rgba(139, 92, 246, 0.35);
+}
+
+
+/* 
+--- Свечение для ТЕМНОЙ ТЕМЫ ---
+*/
+.dark-theme .about-image-panel::after {
+  /* Возвращаем белое свечение */
+  box-shadow: 0 0 50px 10px rgba(236, 236, 236, 0.3);
+  /* ИЗМЕНЕНИЕ: Свечение в темной теме изначально скрыто */
+  opacity: 0;
+}
+
+/* Показываем свечение при наведении в темной теме */
+.dark-theme .about-image-panel:hover::after {
+  opacity: 1;
+}
+
+
+/* Стили для самой картинки (остаются без изменений) */
+.about-image-panel img {
+  max-width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 16px;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  transition: transform 0.1s ease-out, filter 0.3s ease;
+  transform: rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+}
+
+.about-image-panel:hover img {
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+}

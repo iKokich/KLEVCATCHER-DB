@@ -1,0 +1,14 @@
+/* src/components/ScrambledText.css */
+.text-block {
+  max-width: 600px; /* Ограничим ширину для лучшей читаемости */
+  font-family: monospace;
+  font-size: clamp(16px, 2vw, 24px); /* Адаптивный размер шрифта */
+  line-height: 1.6;
+  
+  /* Цвет текста будет наследоваться от родителя, адаптируясь к теме */
+}
+
+.char {
+  will-change: transform;
+  display: inline-block;
+}

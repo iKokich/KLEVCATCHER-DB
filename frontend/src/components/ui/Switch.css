@@ -1,0 +1,89 @@
+/* src/components/ui/Switch.css */
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  width: 44px;
+  height: 24px;
+  padding: 2px;
+  background: #27272a;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.switch:hover {
+  background: #3f3f46;
+}
+
+.switch:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(117, 73, 196, 0.4);
+}
+
+.switch-checked {
+  background: #fafafa;
+}
+
+.switch-checked:hover {
+  background: #e4e4e7;
+}
+
+.switch-thumb {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: #fafafa;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch-checked .switch-thumb {
+  transform: translateX(20px);
+  background: #09090b;
+}
+
+.switch-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.switch-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fafafa;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Light theme */
+.light-theme .switch {
+  background: #e4e4e7;
+}
+
+.light-theme .switch:hover {
+  background: #d4d4d8;
+}
+
+.light-theme .switch-checked {
+  background: #09090b;
+}
+
+.light-theme .switch-checked:hover {
+  background: #27272a;
+}
+
+.light-theme .switch-thumb {
+  background: #09090b;
+}
+
+.light-theme .switch-checked .switch-thumb {
+  background: #fafafa;
+}
+
+.light-theme .switch-label {
+  color: #09090b;
+}

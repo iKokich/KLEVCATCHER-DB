@@ -1,0 +1,117 @@
+@keyframes moveParticle {
+  0% { transform: translate(0, 0); opacity: 0.5; }
+  100% { transform: translate(var(--x, 0), var(--y, 0)); opacity: 0; }
+}
+
+.features-container {
+  position: absolute;
+  top: 50%; 
+  right: 4rem;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: grid;
+  grid-template-columns: repeat(3, 180px);
+  grid-auto-rows: minmax(120px, auto);
+  gap: 1rem;
+  perspective: 1500px;
+}
+
+/* 
+==============================================
+--- СТИЛИ ВИДЖЕТА ДЛЯ СВЕТЛОЙ ТЕМЫ (по умолчанию) ---
+==============================================
+*/
+.grid-item {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+  transform: rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+
+  /* ИЗМЕНЕНИЕ: Добавляем постоянное легкое фиолетовое свечение */
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.15);
+}
+
+.grid-item:hover {
+  border-color: #8B5CF6;
+  /* ИЗМЕНЕНИЕ: Усиливаем свечение при наведении */
+  box-shadow: 0 10px 35px rgba(139, 92, 246, 0.25);
+  transform: translateY(-5px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+}
+
+/* УДАЛЕНЫ псевдо-элементы ::before и ::after для светлой темы, так как они больше не нужны */
+
+.particle {
+  position: absolute;
+  width: 3px; 
+  height: 3px;
+  border-radius: 50%;
+  background: #8B5CF6;
+  opacity: 0;
+  top: calc(50% + var(--y, 0px));
+  left: calc(50% + var(--x, 0px));
+  animation: moveParticle 20s infinite;
+  transition: background-color 0.3s ease;
+}
+
+h4 { font-size: 1.25rem; color: #1F2937; margin: 0.25rem 0; transition: color 0.3s ease; }
+.category, .description { font-size: 0.9rem; color: #6B7281; margin: 0; transition: color 0.3s ease; }
+
+/* 
+==============================================
+--- СТИЛИ ВИДЖЕТА ДЛЯ ТЕМНОЙ ТЕМЫ ---
+==============================================
+*/
+.dark-theme .grid-item {
+  background: rgba(71, 71, 135, 0.7);
+  border: 1px solid rgba(170, 171, 184, 0.2);
+  /* ИЗМЕНЕНИЕ: Убираем свечение по умолчанию для темной темы */
+  box-shadow: none;
+}
+/* Оставляем старые красивые эффекты свечения для темной темы, которые работают только при наведении */
+.dark-theme .grid-item::before { content: ''; position: absolute; top: var(--mouse-y, 0px); left: var(--mouse-x, 0px); width: 250px; height: 250px; background: radial-gradient(circle closest-side, rgba(236, 236, 236, 0.25), transparent); border-radius: 50%; transform: translate(-50%, -50%); opacity: 0; transition: opacity 0.3s ease; }
+.dark-theme .grid-item::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(236, 236, 236, 0.3), transparent); -webkit-mask: radial-gradient(transparent, transparent), linear-gradient(white 0 0) content-box, linear-gradient(white 0 0); mask: radial-gradient(transparent, transparent), linear-gradient(white 0 0) content-box, linear-gradient(white 0 0); -webkit-mask-composite: source-out; mask-composite: subtract; opacity: 0; transition: opacity 0.3s ease; }
+.dark-theme .grid-item:hover { 
+  box-shadow: 0 0 40px rgba(236, 236, 236, 0.3); /* Белое свечение при наведении */
+  border-color: rgba(170, 171, 184, 0.2); /* Убедимся, что рамка не меняется */
+  transform: translateY(0) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)); /* Убираем "подъем" для темной темы, так как есть другие эффекты */
+}
+.dark-theme .grid-item:hover::before,
+.dark-theme .grid-item:hover::after { opacity: 1; }
+.dark-theme h4 { color: #ECECEC; }
+.dark-theme .category, .dark-theme .description { color: #AAABB8; }
+.dark-theme .particle { background: #ECECEC; }
+
+/* --- Остальной код --- */
+.particles-container { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; opacity: 0; transition: opacity 0.4s ease; }
+.grid-item:hover .particles-container { opacity: 1; }
+.particle:nth-child(1) { --x: 30px; --y: 80px; }
+.particle:nth-child(2) { --x: 120px; --y: 20px; }
+.particle:nth-child(3) { --x: -50px; --y: -40px; }
+.particle:nth-child(4) { --x: -100px; --y: 60px; }
+.particle:nth-child(5) { --x: 80px; --y: -70px; }
+.particle:nth-child(6) { --x: -20px; --y: 100px; }
+.particle:nth-child(7) { --x: 150px; --y: -50px; }
+.particle:nth-child(8) { --x: -80px; --y: 10px; }
+.particle:nth-child(9) { --x: 50px; --y: -110px; }
+.particle:nth-child(10) { --x: -130px; --y: -20px; }
+.particle:nth-child(11) { --x: 40px; --y: 90px; }
+.particle:nth-child(12) { --x: 100px; --y: 30px; }
+.particle:nth-child(13) { --x: -60px; --y: -60px; }
+.particle:nth-child(14) { --x: -110px; --y: 70px; }
+.particle:nth-child(15) { --x: 90px; --y: -80px; }
+.particle:nth-child(16) { --x: -30px; --y: 110px; }
+.particle:nth-child(17) { --x: 160px; --y: -60px; }
+.particle:nth-child(18) { --x: -90px; --y: 20px; }
+.particle:nth-child(19) { --x: 60px; --y: -120px; }
+.particle:nth-child(20) { --x: -140px; --y: -30px; }
+.item-teamwork { grid-column: span 2; }
+.item-efficiency { grid-row: span 2; }
+.item-content { pointer-events: none; z-index: 2; position: relative; }

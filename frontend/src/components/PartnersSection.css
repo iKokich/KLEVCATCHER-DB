@@ -1,0 +1,16 @@
+/* src/components/PartnersSection.css */
+.partners-section {
+  /* Фон будет наследоваться от .app-wrapper */
+}
+
+.partners-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.partners-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+}

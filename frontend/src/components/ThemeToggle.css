@@ -1,0 +1,28 @@
+/* src/components/ThemeToggle.css */
+.theme-toggle-btn {
+  /* Убираем все стандартные стили кнопки */
+  background: transparent;
+  border: none;
+  outline: none; /* <-- ВАЖНОЕ ИСПРАВЛЕНИЕ */
+  
+  cursor: pointer;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Убираем возможное выделение текста */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Стили для самой иконки SVG */
+.theme-toggle-btn svg {
+  font-size: 1.2rem;
+  color: #AAABB8;
+  transition: color 0.2s ease, transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover svg {
+  color: #ECECEC;
+  transform: rotate(15deg);
+}
