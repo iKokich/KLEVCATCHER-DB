@@ -1,13 +1,26 @@
 // src/pages/dashboard/CheckView.js
 import { useEffect, useMemo, useState } from 'react';
 import apiUrl from '../../apiClient';
+import MultiStepLoader from '../../components/ui/MultiStepLoader';
 
 const HISTORY_KEY = 'vt_scan_history';
+
+const scanningStates = [
+  { text: "Подключение к VirusTotal API..." },
+  { text: "Отправка индикатора на анализ..." },
+  { text: "Сканирование антивирусными движками..." },
+  { text: "Проверка репутации..." },
+  { text: "Анализ поведения..." },
+  { text: "Сбор результатов от движков..." },
+  { text: "Формирование отчёта..." },
+  { text: "Завершение анализа..." },
+];
 
 function CheckView() {
   const [indicator, setIndicator] = useState('');
   const [scanResult, setScanResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
   const [error, setError] = useState('');
   const [history, setHistory] = useState(() => {
     try {
@@ -37,6 +50,7 @@ function CheckView() {
 
     try {
       setLoading(true);
+      setShowLoader(true);
       const res = await fetch(apiUrl('/api/virustotal/scan'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -66,6 +80,7 @@ function CheckView() {
       setError(err.message || 'Не удалось выполнить сканирование');
     } finally {
       setLoading(false);
+      setShowLoader(false);
     }
   };
 
@@ -99,13 +114,12 @@ function CheckView() {
         </div>
       </form>
 
-      {loading && (
-        <div className="vt-loader">
-          <span />
-          <span />
-          <span />
-        </div>
-      )}
+      {/* Multi-Step Loader */}
+      <MultiStepLoader 
+        loading={showLoader} 
+        loadingStates={scanningStates}
+        duration={1200}
+      />
 
       {error && <div className="vt-error">{error}</div>}
 
