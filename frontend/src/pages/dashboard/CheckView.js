@@ -48,6 +48,10 @@ function CheckView() {
       return;
     }
 
+    // Минимальное время показа loader (все шаги * duration)
+    const minLoaderTime = scanningStates.length * 1200;
+    const startTime = Date.now();
+
     try {
       setLoading(true);
       setShowLoader(true);
@@ -57,6 +61,13 @@ function CheckView() {
         body: JSON.stringify({ indicator: indicator.trim() }),
       });
       const payload = await res.json();
+      
+      // Ждём минимальное время для показа всех шагов
+      const elapsed = Date.now() - startTime;
+      if (elapsed < minLoaderTime) {
+        await new Promise(resolve => setTimeout(resolve, minLoaderTime - elapsed));
+      }
+      
       if (!res.ok) {
         throw new Error(payload.message || payload.error || 'Ошибка запроса');
       }
@@ -77,6 +88,11 @@ function CheckView() {
         return next.slice(0, 6);
       });
     } catch (err) {
+      // Ждём минимальное время даже при ошибке
+      const elapsed = Date.now() - startTime;
+      if (elapsed < minLoaderTime) {
+        await new Promise(resolve => setTimeout(resolve, minLoaderTime - elapsed));
+      }
       setError(err.message || 'Не удалось выполнить сканирование');
     } finally {
       setLoading(false);
