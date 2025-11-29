@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { FiBookmark, FiCopy, FiHeart, FiStar, FiCheck, FiTrash2 } from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';
 import apiUrl from '../../apiClient';
-import { readBookmarks, toggleBookmark } from '../../utils/bookmarks';
+import { readBookmarks, toggleBookmark, removeBookmark } from '../../utils/bookmarks';
 import ConfirmModal from '../../components/ConfirmModal';
 
 function SigmaCollectionView() {
@@ -118,6 +118,9 @@ function SigmaCollectionView() {
       if (res.ok) {
         // Remove from list
         setRules(prev => prev.filter(r => r.id !== ruleToDelete.id));
+        // Remove from bookmarks
+        const updatedBookmarks = removeBookmark(ruleToDelete.id);
+        setBookmarks(updatedBookmarks);
         // Clear selection if deleted rule was selected
         if (selectedRule?.id === ruleToDelete.id) {
           setSelectedRule(null);

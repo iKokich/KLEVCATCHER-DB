@@ -32,3 +32,10 @@ export function clearBookmarks() {
   persist([]);
 }
 
+export function removeBookmark(ruleId) {
+  const current = readBookmarks();
+  const next = current.filter((item) => item.id !== ruleId);
+  persist(next);
+  return next;
+}
+
