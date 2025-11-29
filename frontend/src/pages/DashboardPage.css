@@ -2030,3 +2030,16 @@
 .dark-theme .sigma-delete-notification span {
   color: #ffffff;
 }
+
+/* VT History item text truncation */
+.vt-history-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  display: block;
+}
+
+.vt-history-item {
+  overflow: hidden;
+}
