@@ -1,7 +1,30 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "lastUpdate": "2025-11-30",
   "updates": [
+    {
+      "version": "1.1.0",
+      "date": "2025-11-30",
+      "title": "�  Новые функции!",
+      "changes": [
+        {
+          "type": "feature",
+          "text": "Multi-step loader при сканировании в Analys"
+        },
+        {
+          "type": "feature",
+          "text": "Система уведомлений 'Что нового'"
+        },
+        {
+          "type": "feature",
+          "text": "Модальное окно More с GitHub и Buy me a coffee"
+        },
+        {
+          "type": "improvement",
+          "text": "Улучшенная анимация процесса сканирования"
+        }
+      ]
+    },
     {
       "version": "1.0.0",
       "date": "2025-11-30",
