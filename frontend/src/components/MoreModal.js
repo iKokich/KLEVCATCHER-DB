@@ -52,7 +52,7 @@ function MoreModal({ isOpen, onClose }) {
         </div>
 
         <div className="more-modal-footer">
-          <p>KlevCatcher v1.0.0</p>
+          <p>KlevCatcher v1.1.0</p>
           <p>Made with ❤️</p>
         </div>
       </div>
