@@ -1,0 +1,308 @@
+/* src/components/WhatsNewModal.css */
+
+/* Notification Bell */
+.whats-new-bell {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+  z-index: 9999;
+  animation: bellPulse 2s infinite;
+  transition: transform 0.2s ease;
+}
+
+.whats-new-bell:hover {
+  transform: scale(1.1);
+}
+
+.bell-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 2px solid white;
+  animation: badgePulse 1.5s infinite;
+}
+
+@keyframes bellPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4); }
+  50% { box-shadow: 0 4px 30px rgba(124, 58, 237, 0.6); }
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Modal Overlay */
+.whats-new-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal */
+.whats-new-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;
+  overflow: hidden;
+  position: relative;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.whats-new-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.whats-new-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Header */
+.whats-new-header {
+  text-align: center;
+  padding: 2rem 2rem 1.5rem;
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  color: white;
+}
+
+.whats-new-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.75rem;
+}
+
+.whats-new-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.version-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Content */
+.whats-new-content {
+  padding: 1.5rem 2rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.update-section {
+  margin-bottom: 1.5rem;
+}
+
+.update-section:last-child {
+  margin-bottom: 0;
+}
+
+.update-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.update-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.update-date {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.changes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.change-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.change-item:last-child {
+  margin-bottom: 0;
+}
+
+.change-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.change-icon.feature { color: #7c3aed; }
+.change-icon.improvement { color: #f59e0b; }
+.change-icon.fix { color: #10b981; }
+
+.change-type {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.change-type.feature {
+  background: rgba(124, 58, 237, 0.1);
+  color: #7c3aed;
+}
+
+.change-type.improvement {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.change-type.fix {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.change-text {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* Footer */
+.whats-new-footer {
+  padding: 1rem 2rem 1.5rem;
+  text-align: center;
+}
+
+.whats-new-btn {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.whats-new-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+}
+
+/* Dark Theme */
+.dark-theme .whats-new-modal {
+  background: #18181b;
+}
+
+.dark-theme .whats-new-close {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .update-header h3 {
+  color: #fafafa;
+}
+
+.dark-theme .update-date {
+  color: #a1a1aa;
+}
+
+.dark-theme .change-item {
+  background: #27272a;
+}
+
+.dark-theme .change-text {
+  color: #d4d4d8;
+}
+
+/* Scrollbar */
+.whats-new-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.whats-new-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.whats-new-content::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.dark-theme .whats-new-content::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+}

@@ -2,6 +2,7 @@
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from './MainLayout'; 
 import DashboardPage from './pages/DashboardPage';
+import WhatsNewModal from './components/WhatsNewModal';
 import OverviewPage from './pages/dashboard/OverviewPage';
 import ReportsView from './pages/dashboard/ReportsView';
 import CreateReportView from './pages/dashboard/CreateReportView';
@@ -18,7 +19,9 @@ import AdminPanel from './pages/dashboard/AdminPanel';
 
 function App() {
   return (
-    <Routes>
+    <>
+      <WhatsNewModal />
+      <Routes>
       <Route path="/" element={<MainLayout />} />
       <Route path="/dashboard" element={<DashboardPage />}>
         <Route index element={<OverviewPage />} />
@@ -36,6 +39,7 @@ function App() {
         <Route path="admin" element={<AdminPanel />} />
       </Route>
     </Routes>
+    </>
   );
 }
 
