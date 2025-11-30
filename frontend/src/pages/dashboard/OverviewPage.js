@@ -664,12 +664,12 @@ function SimpleAreaChart({ data }) {
     <svg viewBox={`0 0 ${width} ${height}`} className="area-chart-svg" preserveAspectRatio="none">
       <defs>
         <linearGradient id="reportsGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7549c4" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#7549c4" stopOpacity="0.05" />
+          <stop offset="0%" stopColor="#7549c4" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#7549c4" stopOpacity="0.02" />
         </linearGradient>
         <linearGradient id="malwareGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#ef4444" stopOpacity="0.05" />
+          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#ef4444" stopOpacity="0.02" />
         </linearGradient>
       </defs>
       
@@ -677,9 +677,9 @@ function SimpleAreaChart({ data }) {
       <path d={malwareAreaPath} fill="url(#malwareGradient)" />
       <path d={reportsAreaPath} fill="url(#reportsGradient)" />
       
-      {/* Lines */}
-      <path d={malwarePath} fill="none" stroke="#ef4444" strokeWidth="1.5" opacity="0.8" />
-      <path d={reportsPath} fill="none" stroke="#7549c4" strokeWidth="2" />
+      {/* Lines - тонкие линии */}
+      <path d={malwarePath} fill="none" stroke="#ef4444" strokeWidth="0.5" opacity="0.9" />
+      <path d={reportsPath} fill="none" stroke="#7549c4" strokeWidth="0.6" />
     </svg>
   );
 }
