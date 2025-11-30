@@ -286,13 +286,19 @@ function OverviewPage() {
             ) : filteredChartData.length > 0 ? (
               <>
                 <SimpleAreaChart data={filteredChartData} />
+                {/* Даты под графиком */}
+                <div className="chart-dates">
+                  {filteredChartData.filter((_, i) => i % Math.ceil(filteredChartData.length / 8) === 0 || i === filteredChartData.length - 1).map((item, idx) => (
+                    <span key={idx} className="chart-date">{item.date}</span>
+                  ))}
+                </div>
                 <div className="chart-legend">
                   <div className="legend-item">
-                    <span className="legend-dot" style={{ backgroundColor: '#7549c4' }}></span>
+                    <span className="legend-dot" style={{ backgroundColor: '#a1a1aa' }}></span>
                     <span>Reports</span>
                   </div>
                   <div className="legend-item">
-                    <span className="legend-dot" style={{ backgroundColor: '#ef4444' }}></span>
+                    <span className="legend-dot" style={{ backgroundColor: '#52525b' }}></span>
                     <span>Malware</span>
                   </div>
                 </div>

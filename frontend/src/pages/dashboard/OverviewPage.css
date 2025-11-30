@@ -1374,3 +1374,22 @@
 .dark-theme .threat-source-link {
   color: #a78bfa;
 }
+
+
+/* Chart dates */
+.chart-dates {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  margin-top: 0.5rem;
+}
+
+.chart-date {
+  font-size: 0.75rem;
+  color: #71717a;
+  font-weight: 500;
+}
+
+.dark-theme .chart-date {
+  color: #a1a1aa;
+}
