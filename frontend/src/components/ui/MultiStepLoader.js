@@ -1,5 +1,6 @@
 // src/components/ui/MultiStepLoader.js
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { FiCheck, FiLoader } from 'react-icons/fi';
 import './MultiStepLoader.css';
 
@@ -48,7 +49,8 @@ function MultiStepLoader({
 
   if (!loading) return null;
 
-  return (
+  // Используем Portal чтобы рендерить в body для полноэкранного overlay
+  return createPortal(
     <div className="multi-step-overlay">
       <div className="multi-step-modal">
         <div className="multi-step-glow" />
@@ -83,7 +85,8 @@ function MultiStepLoader({
           ))}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
