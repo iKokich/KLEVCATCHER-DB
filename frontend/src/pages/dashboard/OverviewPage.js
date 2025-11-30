@@ -616,47 +616,55 @@ function SimpleAreaChart({ data }) {
   }
 
   const maxValue = Math.max(...data.map(d => Math.max(d.reports || 0, d.malware || 0)), 1);
-  const width = 100;
-  const height = 60;
-  const padding = 5;
+  const width = 1000;
+  const height = 300;
+  const padding = 20;
 
-  // Функция для создания плавной кривой через точки (cubic Bezier)
-  const createSmoothPath = (values, color) => {
-    if (values.length === 0) return '';
-
-    const points = values.map((val, i) => ({
-      x: (i / (values.length - 1)) * width,
-      y: height - ((val / maxValue) * (height - padding * 2)) - padding
-    }));
-
+  // Catmull-Rom spline для очень плавных кривых как на фото
+  const catmullRomSpline = (points, tension = 0.5) => {
+    if (points.length < 2) return '';
+    
     let path = `M ${points[0].x},${points[0].y}`;
-
-    // Создаем плавные кривые Безье между точками
+    
     for (let i = 0; i < points.length - 1; i++) {
-      const current = points[i];
-      const next = points[i + 1];
-      const controlPointX = (current.x + next.x) / 2;
+      const p0 = points[Math.max(0, i - 1)];
+      const p1 = points[i];
+      const p2 = points[i + 1];
+      const p3 = points[Math.min(points.length - 1, i + 2)];
       
-      path += ` C ${controlPointX},${current.y} ${controlPointX},${next.y} ${next.x},${next.y}`;
+      const cp1x = p1.x + (p2.x - p0.x) / 6 * tension;
+      const cp1y = p1.y + (p2.y - p0.y) / 6 * tension;
+      const cp2x = p2.x - (p3.x - p1.x) / 6 * tension;
+      const cp2y = p2.y - (p3.y - p1.y) / 6 * tension;
+      
+      path += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`;
     }
-
+    
     return path;
   };
 
-  // Создаем области (area) для заливки
+  const createPoints = (values) => {
+    return values.map((val, i) => ({
+      x: (i / (values.length - 1)) * width,
+      y: height - padding - ((val / maxValue) * (height - padding * 2))
+    }));
+  };
+
   const createAreaPath = (values) => {
-    const linePath = createSmoothPath(values);
+    const points = createPoints(values);
+    const linePath = catmullRomSpline(points, 1);
     if (!linePath) return '';
-    
-    // Добавляем линии вниз и вправо для замыкания области
     return `${linePath} L ${width},${height} L 0,${height} Z`;
   };
 
   const reportsValues = data.map(d => d.reports || 0);
   const malwareValues = data.map(d => d.malware || 0);
 
-  const reportsPath = createSmoothPath(reportsValues);
-  const malwarePath = createSmoothPath(malwareValues);
+  const reportsPoints = createPoints(reportsValues);
+  const malwarePoints = createPoints(malwareValues);
+  
+  const reportsPath = catmullRomSpline(reportsPoints, 1);
+  const malwarePath = catmullRomSpline(malwarePoints, 1);
   const reportsAreaPath = createAreaPath(reportsValues);
   const malwareAreaPath = createAreaPath(malwareValues);
 
@@ -664,22 +672,24 @@ function SimpleAreaChart({ data }) {
     <svg viewBox={`0 0 ${width} ${height}`} className="area-chart-svg" preserveAspectRatio="none">
       <defs>
         <linearGradient id="reportsGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7549c4" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#7549c4" stopOpacity="0.02" />
+          <stop offset="0%" stopColor="#a1a1aa" stopOpacity="0.4" />
+          <stop offset="50%" stopColor="#a1a1aa" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#a1a1aa" stopOpacity="0.02" />
         </linearGradient>
         <linearGradient id="malwareGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.12" />
-          <stop offset="100%" stopColor="#ef4444" stopOpacity="0.02" />
+          <stop offset="0%" stopColor="#71717a" stopOpacity="0.5" />
+          <stop offset="50%" stopColor="#71717a" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#71717a" stopOpacity="0.02" />
         </linearGradient>
       </defs>
       
-      {/* Area fills */}
+      {/* Area fills - мягкие серые тона как на фото */}
       <path d={malwareAreaPath} fill="url(#malwareGradient)" />
       <path d={reportsAreaPath} fill="url(#reportsGradient)" />
       
-      {/* Lines - тонкие линии */}
-      <path d={malwarePath} fill="none" stroke="#ef4444" strokeWidth="0.5" opacity="0.9" />
-      <path d={reportsPath} fill="none" stroke="#7549c4" strokeWidth="0.6" />
+      {/* Lines - тонкие плавные линии */}
+      <path d={malwarePath} fill="none" stroke="#52525b" strokeWidth="1.5" />
+      <path d={reportsPath} fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
     </svg>
   );
 }
